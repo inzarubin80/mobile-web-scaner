@@ -13,7 +13,8 @@ const formStyle = {
   borderRadius: '5px',
   background: '#f5f5f5',
   width: '90%',
-  display: 'block'
+  display: 'block',
+  height: '300px',
 };
 
 const labelStyle = {
@@ -55,36 +56,6 @@ const UseFocus = () => {
 }
 
 
-
-
-
-
-/*
-const Form = ({ onSubmit, setBarcode, barcode }) => {
-
-  return (
-    <form style={formStyle} onSubmit={onSubmit} >
-    
-      <div>
-      <label style={labelStyle} >{"Barcode:"}</label>
-      <input autoFocus  type={"text"} value={barcode} style={inputStyle} onChange={(event) => setBarcode(event.target.value)} />
-    </div>
-
-      <div>
-        
-        <input type="submit" value="Отправить" />
-
-      </div>
-    </form>
-  );
-};
-*/
-
-// Usage example:
-
-
-
-
 const FieldBarcode_ = React.forwardRef((props, ref) => {
   return (
     <div>
@@ -101,8 +72,9 @@ const FieldBarcode_ = React.forwardRef((props, ref) => {
 const App = () => {
 
   const url = 'https://virtserver.swaggerhub.com/elisru/ret-shop/1.0.0/scan';
-
   const [refBarcode, setFocus] = UseFocus();
+  const [response, setResponse] = React.useState('');
+
 
   return (
     <div style={appStyle}>
@@ -113,7 +85,13 @@ const App = () => {
         }}
         onSubmit={(values, {resetForm}) => {
 
+          setResponse('');
+          
+          if (!values.barcode) {
+            return;
+          }
           console.log(values);
+         
           document.getElementById("barcode").focus();
           fetch(url, {
             method: 'POST',
@@ -132,10 +110,12 @@ const App = () => {
               // enter you logic when the fetch is successful
               resetForm({})
               console.log(data)
+              setResponse(data[0].items[0].name);
             })
             .catch(error => {
               // enter your logic for when there is an error (ex. error toast)
               resetForm({})
+              setResponse('');
               console.log(error)
             })
         }
@@ -147,10 +127,13 @@ const App = () => {
           <label style={labelStyle} htmlFor="barcode">Barcode</label>
           <Field style={inputStyle} autoFocus id="barcode" name="barcode" placeholder="barcode"/>
           <button style={submitStyle} type="submit">Submit</button>
-
+          <h4>{response}</h4>
         </Form>
 
       </Formik>
+
+     
+      
     </div>)
 };
 
