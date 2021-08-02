@@ -2,19 +2,24 @@ import React from 'react';
 import { Formik, Field, Form } from 'formik';
 
 const appStyle = {
-  height: '250px',
+  height: '100%',
   display: 'flex'
 };
 
 const formStyle = {
-  margin: 'auto',
+
+  margin: '10px',
   padding: '10px',
   border: '1px solid #c9c9c9',
   borderRadius: '5px',
   background: '#f5f5f5',
   width: '90%',
   display: 'block',
-  height: '300px',
+  height: '100%',
+  //minHeight: '90vh',
+  //height: '100%'
+
+
 };
 
 const labelStyle = {
@@ -42,6 +47,10 @@ const submitStyle = {
   fontSize: '15px',
   color: 'white',
   display: 'block'
+};
+
+const responseStyle = {
+  textAlign:'center' 
 };
 
 
@@ -86,7 +95,7 @@ const App = () => {
         onSubmit={(values, {resetForm}) => {
 
           setResponse('');
-          
+
           if (!values.barcode) {
             return;
           }
@@ -127,7 +136,7 @@ const App = () => {
           <label style={labelStyle} htmlFor="barcode">Barcode</label>
           <Field style={inputStyle} autoFocus id="barcode" name="barcode" placeholder="barcode"/>
           <button style={submitStyle} type="submit">Submit</button>
-          <h4>{response}</h4>
+          <h4 style={responseStyle}>{response}</h4>
         </Form>
 
       </Formik>
