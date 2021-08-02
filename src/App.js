@@ -111,7 +111,7 @@ const App = () => {
         initialValues={{
           barcode: ''
         }}
-        onSubmit={(values) => {
+        onSubmit={(values, {resetForm}) => {
 
           console.log(values);
           document.getElementById("barcode").focus();
@@ -130,10 +130,12 @@ const App = () => {
             .then(res => res.json())
             .then(data => {
               // enter you logic when the fetch is successful
+              resetForm({})
               console.log(data)
             })
             .catch(error => {
               // enter your logic for when there is an error (ex. error toast)
+              resetForm({})
               console.log(error)
             })
         }
