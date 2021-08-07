@@ -50,7 +50,7 @@ const submitStyle = {
 };
 
 const responseStyle = {
-  textAlign:'center' 
+  textAlign: 'center'
 };
 
 
@@ -92,7 +92,7 @@ const App = () => {
         initialValues={{
           barcode: ''
         }}
-        onSubmit={(values, {resetForm}) => {
+        onSubmit={(values, { resetForm }) => {
 
           setResponse('');
 
@@ -100,7 +100,7 @@ const App = () => {
             return;
           }
           console.log(values);
-         
+
           document.getElementById("barcode").focus();
           fetch(url, {
             method: 'POST',
@@ -134,15 +134,17 @@ const App = () => {
         <Form style={formStyle}>
 
           <label style={labelStyle} htmlFor="barcode">Barcode</label>
-          <Field style={inputStyle} autocomplete="off" autoFocus id="barcode" name="barcode" placeholder="barcode"/>
+          <Field onKeyDown={(event) => {
+            event.preventDefault();
+          }} style={inputStyle} autocomplete="off" autoFocus id="barcode" name="barcode" placeholder="barcode" />
           <button style={submitStyle} type="submit">Submit</button>
           <h4 style={responseStyle}>{response}</h4>
         </Form>
 
       </Formik>
 
-     
-      
+
+
     </div>)
 };
 
