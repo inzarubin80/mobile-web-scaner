@@ -134,7 +134,7 @@ const App = () => {
         <Form style={formStyle}>
 
           <label style={labelStyle} htmlFor="barcode">Barcode</label>
-          <Field style={inputStyle} autoFocus id="barcode" name="barcode" placeholder="barcode"/>
+          <Field style={inputStyle} autocomplete="off" autoFocus id="barcode" name="barcode" placeholder="barcode"/>
           <button style={submitStyle} type="submit">Submit</button>
           <h4 style={responseStyle}>{response}</h4>
         </Form>
